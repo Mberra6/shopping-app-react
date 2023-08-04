@@ -37,10 +37,10 @@ export const AppReducer = (state, action) => {
 
         case 'DELETE_ITEM':
             state.expenses.map((expense) => {
-                if ( expense.name === action.payload.name) {
+                if (expense.name === action.payload.name) {
                     expense.quantity = 0;
                 }
-                new_expenses.push(expense.quantity);
+                new_expenses.push(expense);
                 return true;
             })
             state.expenses = new_expenses;
@@ -83,7 +83,7 @@ export const AppProvider = (props) => {
     const [state, dispatch] = useReducer(AppReducer,initialState);
 
     const totalExpenses = state.expenses.reduce((total, item) => {
-        return (total = total + (irem.unitprice*item.quantity));
+        return (total = total + (item.unitprice*item.quantity));
     }, 0);
     state.CartValue = totalExpenses;
 
